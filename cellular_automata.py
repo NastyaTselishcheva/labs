@@ -2,6 +2,12 @@ import random
 
 
 class GameOfLife:
+    """
+    Данный класс реализует «Жизнь» Конвея, основанную на правиле B3/S23,
+    т.е. для рождения клетки (Birth) требуется ровно 3 живых соседа,
+    для выживания (Survival) – 2 или 3.
+    Во всех других случаях клетка умирает (или же остаётся пустой).
+    """
     def __init__(self, width, height):
         self.field = [[0] * width for _ in range(height)]
 
@@ -12,6 +18,10 @@ class GameOfLife:
                     self.field[y][x] = 1
 
     def run_transition_rule(self):
+        """
+        Метод реализует правило B3/S23
+        :return: None
+        """
         # buffer field
         buffer_field = [[0] * len(self.field[0]) for _ in range(len(self.field))]
 
