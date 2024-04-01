@@ -7,7 +7,7 @@ class GameOfLife:
 
     def initialize(self, life_fraction):
         for y in range(1, len(self.field) - 1):
-            for x in range(1, len(self.field[0] - 1)):
+            for x in range(1, len(self.field[0]) - 1):
                 if random.randint(1, 100) <= life_fraction:
                     self.field[y][x] = 1
 
@@ -16,7 +16,7 @@ class GameOfLife:
         buffer_field = [[0] * len(self.field[0]) for _ in range(len(self.field))]
 
         for y in range(1, len(self.field) - 1):
-            for x in range(1, len(self.field[0] - 1)):
+            for x in range(1, len(self.field[0]) - 1):
                 live_neighbors = 0
                 # 3x3 - find neighbors
                 for dy in range(-1, 2):
@@ -35,5 +35,5 @@ class GameOfLife:
                     buffer_field[y][x] = self.field[y][x]
         # copy field
         for y in range(1, len(self.field) - 1):
-            for x in range(1, len(self.field[0] - 1)):
+            for x in range(1, len(self.field[0]) - 1):
                 self.field[y][x] = buffer_field[y][x]
