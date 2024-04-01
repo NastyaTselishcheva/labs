@@ -13,8 +13,7 @@ def render_field(field):
     print('-' * len(field))
 
 
-def render_pygame(field, screen):
-    scale = 15
+def render_pygame(field, scale, screen):
     for y in range(len(field)):
         for x in range(len(field[0])):
             if field[y][x] == 0:
@@ -26,11 +25,15 @@ def render_pygame(field, screen):
 
 
 def main():
-    gof = GameOfLife(30, 30)
-    gof.initialize(30)
+    field_size = int(input("Please input game field size (one number): "))
+    living_cells_proportion = int(input("Please input the proportion of living cells: "))
+    cells_size = int(input("Please input cell size in pixels: "))
+    gof = GameOfLife(field_size, field_size)
+    gof.initialize(living_cells_proportion)
 
     pygame.init()
-    screen = pygame.display.set_mode((640, 480))
+    window_size = (field_size * cells_size, field_size * cells_size)
+    screen = pygame.display.set_mode(window_size)
     pygame.display.set_caption("Game of Life")
     clock = pygame.time.Clock()
 
@@ -40,7 +43,7 @@ def main():
             if event.type == pygame.QUIT:
                 is_running = False
         gof.run_transition_rule()
-        render_pygame(gof.field, screen)
+        render_pygame(gof.field, cells_size, screen)
         pygame.display.flip()
 
         clock.tick(60)
