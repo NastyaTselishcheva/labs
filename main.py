@@ -28,7 +28,18 @@ def main():
     field_size = int(input("Please input game field size (one number): "))
     living_cells_proportion = int(input("Please input the proportion of living cells: "))
     cells_size = int(input("Please input cell size in pixels: "))
-    gof = GameOfLife(field_size, field_size)
+    type_of_game = int(input("Enter type of game:\n1 - B3/S23\n2 - B35678/S5678\n3 - B2/S0\n4 - B234/S:"))
+    if type_of_game == 1:
+        gof = GameOfLife(field_size, field_size)
+    elif type_of_game == 2:
+        gof = Diameba(field_size, field_size)
+    elif type_of_game == 3:
+        gof = LiveOrDie(field_size, field_size)
+    elif type_of_game == 4:
+        gof = PersianCarpet(field_size, field_size)
+    else:
+        print('Unknown type - exit')
+        exit(0)
     gof.initialize(living_cells_proportion)
 
     pygame.init()
