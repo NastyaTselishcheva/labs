@@ -25,10 +25,10 @@ def render_pygame(field, scale, screen):
 
 
 def main():
-    field_size = int(input("Please input game field size (one number): "))
-    living_cells_proportion = int(input("Please input the proportion of living cells: "))
-    cells_size = int(input("Please input cell size in pixels: "))
-    type_of_game = int(input("Enter type of game:\n1 - B3/S23\n2 - B35678/S5678\n3 - B2/S0\n4 - B234/S:"))
+    field_size = int(input("Введите размер поля(одно число): "))
+    living_cells_proportion = int(input("Введите пористость: "))
+    cells_size = int(input("Введите размер пикселя: "))
+    type_of_game = int(input("Выберите тип игры:\n1 - B3/S23\n2 - B35678/S5678\n3 - B2/S0\n4 - B234/S:"))
     if type_of_game == 1:
         gof = GameOfLife(field_size, field_size)
     elif type_of_game == 2:
