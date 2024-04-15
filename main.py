@@ -29,6 +29,7 @@ def main():
     living_cells_proportion = int(input(" Введите пористость: "))
     cells_size = int(input(" Введите размер пикселя: "))
     type_of_game = int(input(" Выберите тип игры:\n1 - B3/S23\n2 - B35678/S5678\n3 - B2/S0\n4 - B234/S:"))
+    font_size = 24
     if type_of_game == 1:
         gof = GameOfLife(field_size, field_size)
     elif type_of_game == 2:
@@ -43,7 +44,9 @@ def main():
     gof.initialize(living_cells_proportion)
 
     pygame.init()
-    window_size = (field_size * cells_size, field_size * cells_size)
+    windows_size_x = field_size * cells_size
+    windows_size_y = field_size * cells_size
+    window_size = (windows_size_x, windows_size_y + font_size)
     screen = pygame.display.set_mode(window_size)
     pygame.display.set_caption("Game of Life")
     clock = pygame.time.Clock()
@@ -51,6 +54,8 @@ def main():
     is_running = True
     # Pause variable
     is_paused = True
+    # Font variable
+    main_font = pygame.font.Font(None, 24)
     while is_running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -63,6 +68,9 @@ def main():
                     is_paused = not is_paused
             if event.type == pygame.MOUSEBUTTONDOWN:
                 cursor_pos = event.pos
+                # задание на отлов выхода за границы
+                if cursor_pos[0] > windows_size_x or cursor_pos[1] > windows_size_y:
+                    continue
                 x_pos = cursor_pos[0] // cells_size
                 y_pos = cursor_pos[1] // cells_size
                 new_state = gof.field[y_pos][x_pos]
@@ -75,6 +83,9 @@ def main():
         if not is_paused:
             gof.run_transition_rule()
         render_pygame(gof.field, cells_size, screen)
+
+        text1 = main_font.render('Я люблю писать программы', True, (255, 255, 255))
+        screen.blit(text1, (0, field_size * cells_size))
         pygame.display.flip()
 
         clock.tick(60)
