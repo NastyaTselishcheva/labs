@@ -29,7 +29,11 @@ def main():
     living_cells_proportion = int(input(" Введите пористость: "))
     cells_size = int(input(" Введите размер пикселя: "))
     type_of_game = int(input(" Выберите тип игры:\n1 - B3/S23\n2 - B35678/S5678\n3 - B2/S0\n4 - B234/S:"))
-    font_size = 24
+    # Размер шрифта - перевод из поинтов в пиксели
+    font_size = int(32 * 0.75)
+    # Количество итераций
+    iteration_count = 0
+
     if type_of_game == 1:
         gof = GameOfLife(field_size, field_size)
     elif type_of_game == 2:
@@ -46,7 +50,7 @@ def main():
     pygame.init()
     windows_size_x = field_size * cells_size
     windows_size_y = field_size * cells_size
-    window_size = (windows_size_x, windows_size_y + font_size)
+    window_size = (windows_size_x, windows_size_y + 2 * font_size)
     screen = pygame.display.set_mode(window_size)
     pygame.display.set_caption("Game of Life")
     clock = pygame.time.Clock()
@@ -82,11 +86,19 @@ def main():
         # if game not paused
         if not is_paused:
             gof.run_transition_rule()
+            iteration_count += 1
         render_pygame(gof.field, cells_size, screen)
 
-        text1 = main_font.render('Я люблю писать программы', True, (255, 255, 255))
+        text_string_1 = f'Размер поля: {field_size}x{field_size}'
+        text_string_2 = f'Живых клеток: {gof.get_alive_cells_count()} Номер итерации: {iteration_count}'
+        text1 = main_font.render(text_string_1, True, (255, 255, 255))
+        text2 = main_font.render(text_string_2, True, (255, 255, 255))
         screen.blit(text1, (0, field_size * cells_size))
+        screen.blit(text2, (0, field_size * cells_size + font_size))
         pygame.display.flip()
+        # Для обновления текста на экране перерисовываем текст на старое место поверх черным цветом
+        text2 = main_font.render(text_string_2, True, (0, 0, 0))
+        screen.blit(text2, (0, field_size * cells_size + font_size))
 
         clock.tick(60)
         pygame.time.delay(200)

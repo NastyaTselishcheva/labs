@@ -49,6 +49,17 @@ class GameOfLife:
             for x in range(1, len(self.field[0]) - 1):
                 self.field[y][x] = buffer_field[y][x]
 
+    def get_alive_cells_count(self):
+        """
+        Подсчёт живых клеток
+        :return:
+        integer
+        """
+        live_cells_counter = 0
+        for line in self.field:
+            live_cells_counter += line.count(1)
+        return live_cells_counter
+
 
 class Diameba(GameOfLife):
     """
