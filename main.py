@@ -61,6 +61,16 @@ def main():
                 if event.key == pygame.K_SPACE:
                     # invert boolean variable
                     is_paused = not is_paused
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                cursor_pos = event.pos
+                x_pos = cursor_pos[0] // cells_size
+                y_pos = cursor_pos[1] // cells_size
+                new_state = gof.field[y_pos][x_pos]
+                if event.button == 1:
+                    new_state = 1
+                if event.button == 3:
+                    new_state = 0
+                gof.field[y_pos][x_pos] = new_state
         # if game not paused
         if not is_paused:
             gof.run_transition_rule()
