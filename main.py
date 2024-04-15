@@ -47,13 +47,23 @@ def main():
     screen = pygame.display.set_mode(window_size)
     pygame.display.set_caption("Game of Life")
     clock = pygame.time.Clock()
-
+    # Let's play
     is_running = True
+    # Pause variable
+    is_paused = True
     while is_running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 is_running = False
-        gof.run_transition_rule()
+            # keypress monitoring
+            if event.type == pygame.KEYDOWN:
+                # Space button for pause on/off
+                if event.key == pygame.K_SPACE:
+                    # invert boolean variable
+                    is_paused = not is_paused
+        # if game not paused
+        if not is_paused:
+            gof.run_transition_rule()
         render_pygame(gof.field, cells_size, screen)
         pygame.display.flip()
 
