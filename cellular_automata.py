@@ -13,8 +13,8 @@ class GameOfLife:
         self.field = [[0] * width for _ in range(height)]
 
     def initialize(self, life_fraction):
-        for y in range(1, len(self.field) - 1):
-            for x in range(1, len(self.field[0]) - 1):
+        for y in range(0, len(self.field) - 1):
+            for x in range(0, len(self.field[0]) - 1):
                 if random.randint(1, 100) <= life_fraction:
                     self.field[y][x] = 1
 
@@ -26,8 +26,8 @@ class GameOfLife:
         # buffer field
         buffer_field = [[0] * len(self.field[0]) for _ in range(len(self.field))]
 
-        for y in range(1, len(self.field) - 1):
-            for x in range(1, len(self.field[0]) - 1):
+        for y in range(0, len(self.field) - 1):
+            for x in range(0, len(self.field[0]) - 1):
                 live_neighbors = 0
                 # 3x3 - find neighbors
                 for dy in range(-1, 2):
@@ -45,8 +45,8 @@ class GameOfLife:
                 else:
                     buffer_field[y][x] = self.field[y][x]
         # copy field
-        for y in range(1, len(self.field) - 1):
-            for x in range(1, len(self.field[0]) - 1):
+        for y in range(0, len(self.field) - 1):
+            for x in range(0, len(self.field[0]) - 1):
                 self.field[y][x] = buffer_field[y][x]
 
     def get_alive_cells_count(self):
@@ -77,8 +77,8 @@ class Diameba(GameOfLife):
         # buffer field
         buffer_field = [[0] * len(self.field[0]) for _ in range(len(self.field))]
 
-        for y in range(1, len(self.field) - 1):
-            for x in range(1, len(self.field[0]) - 1):
+        for y in range(0, len(self.field) - 1):
+            for x in range(0, len(self.field[0]) - 1):
                 live_neighbors = 0
                 # 3x3 - find neighbors
                 for dy in range(-1, 2):
@@ -96,8 +96,8 @@ class Diameba(GameOfLife):
                 else:
                     buffer_field[y][x] = self.field[y][x]
         # copy field
-        for y in range(1, len(self.field) - 1):
-            for x in range(1, len(self.field[0]) - 1):
+        for y in range(0, len(self.field) - 1):
+            for x in range(0, len(self.field[0]) - 1):
                 self.field[y][x] = buffer_field[y][x]
 
 
@@ -123,8 +123,8 @@ class LiveOrDie(GameOfLife):
         # buffer field
         buffer_field = [[0] * len(self.field[0]) for _ in range(len(self.field))]
 
-        for y in range(1, len(self.field) - 1):
-            for x in range(1, len(self.field[0]) - 1):
+        for y in range(0, len(self.field) - 1):
+            for x in range(0, len(self.field[0]) - 1):
                 live_neighbors = 0
                 # 3x3 - find neighbors
                 for dy in range(-1, 2):
@@ -142,8 +142,8 @@ class LiveOrDie(GameOfLife):
                 else:
                     buffer_field[y][x] = self.field[y][x]
         # copy field
-        for y in range(1, len(self.field) - 1):
-            for x in range(1, len(self.field[0]) - 1):
+        for y in range(0, len(self.field) - 1):
+            for x in range(0, len(self.field[0]) - 1):
                 self.field[y][x] = buffer_field[y][x]
 
 
@@ -168,8 +168,8 @@ class PersianCarpet(GameOfLife):
         # buffer field
         buffer_field = [[0] * len(self.field[0]) for _ in range(len(self.field))]
 
-        for y in range(1, len(self.field) - 1):
-            for x in range(1, len(self.field[0]) - 1):
+        for y in range(0, len(self.field) - 1):
+            for x in range(0, len(self.field[0]) - 1):
                 live_neighbors = 0
                 # 3x3 - find neighbors
                 for dy in range(-1, 2):
@@ -187,6 +187,6 @@ class PersianCarpet(GameOfLife):
                 else:
                     buffer_field[y][x] = self.field[y][x]
         # copy field
-        for y in range(1, len(self.field) - 1):
-            for x in range(1, len(self.field[0]) - 1):
+        for y in range(0, len(self.field) - 1):
+            for x in range(0, len(self.field[0]) - 1):
                 self.field[y][x] = buffer_field[y][x]

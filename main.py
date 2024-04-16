@@ -2,17 +2,6 @@ from cellular_automata import *
 import pygame
 
 
-def render_field(field):
-    for y in range(len(field)):
-        for x in range(len(field[0])):
-            if field[y][x] == 0:
-                print(' ', end='')
-            elif field[y][x] == 1:
-                print('*', end='')
-        print()
-    print('-' * len(field))
-
-
 def render_pygame(field, scale, screen):
     for y in range(len(field)):
         for x in range(len(field[0])):
